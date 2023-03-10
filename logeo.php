@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
 
     
     // Hacemos la query para buscar si existe un usuario con estos datos
-    $sql = "SELECT * FROM Empleados WHERE nombre = '$user' AND password = '$password'";
+    $sql = "SELECT * FROM empleados WHERE nombre = '$user' AND password = '$password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

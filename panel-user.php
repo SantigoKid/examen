@@ -18,11 +18,11 @@ $id = $_SESSION['id'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 
 // valor por defecto, usuario
-$sql = "SELECT * FROM empleados WHERE id = $id";
+$sql = "SELECT * FROM EMPLEADOS WHERE id = $id";
 
 // admin
-if ($tipo_usuario == 'admin') $sql = "SELECT * FROM empleados";
-if ($tipo_usuario == 'colaborador') $sql = "SELECT * FROM empleados WHERE tipo_usuario NOT IN 'admin'";
+if ($tipo_usuario == 'admin') $sql = "SELECT * FROM EMPLEADOS";
+if ($tipo_usuario == 'colaborador') $sql = "SELECT * FROM EMPLEADOS WHERE tipo_usuario != 'admin'";
 
 $result = $conn->query($sql);
 
@@ -92,9 +92,9 @@ $result = $conn->query($sql);
             cursor: default;
         }
 
-        tr:hover {
+         tr:hover {
             background-color: rgba(255, 255, 255, 0.3);
-        }
+        } 
 
 
         select {
@@ -164,12 +164,7 @@ $result = $conn->query($sql);
 
 <body>
     <div>
-        <div class="container">
-            <form action="">
-                <input class="search" type="text" name="users" onkeyup="showUser(this.value)">
-            </form>
-            <div id="display">Los datos de la persona se mostrarán aquí...</div>
-        </div>
+       
 
         <h1>Tabla de los usuarios de la BD</h1>
         <div class="centro">
@@ -189,30 +184,5 @@ $result = $conn->query($sql);
 
 </body>
 
-<script>
-    function showUser(text) {
-        let display = document.getElementById('display');
-
-
-        // si el input está vacio, el div también se vacia
-        if (text == '') {
-            display.innerHTML = '';
-            return;
-
-
-        } else {
-            let ajax = new XMLHttpRequest();
-            ajax.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-
-
-                    display.innerHTML = this.responseText;
-                }
-            };
-            ajax.open ('GET', 'panel-user.php?q=' + text, true);
-            ajax.send();
-        }
-    }
-</script>
 
 </html>
